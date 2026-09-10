@@ -1,37 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-    <h1 class="titulo"><strong>The Living Tombstone x CG5 - Temporary Love</strong></h1>
+  <body>
+    <div class="header">
+      <h1>O que você quer ouvir?</h1>
+    </div>
+
     <div class="musicappear">
-        <img class="imagem" src="tltxcg5.jpeg">
+      <img class="imagem" src="tltxcg5.jpeg" />
     </div>
 
     <div>
-        <audio src="The Living Tombstone × CG5 - Temporary Love - The Living Tombstone.mp3"></audio>
+      <audio
+        id="musica"
+        src="The Living Tombstone × CG5 - Temporary Love - The Living Tombstone.mp3"
+      ></audio>
 
-        <button onclick="play()">
-            <h1>Play Music</h1>
-        </button>
-
-        <div class="letras">
-            <p id="antes"></p>
-            <p id="atual">waiting...</p>
-            <p id="prox"></p>
-        </div>
-
+      <div class="letras">
+        <p id="antes"></p>
+        <p id="atual">waiting...</p>
+        <p id="prox"></p>
+      </div>
     </div>
 
+    <div class="play">
+      <img src="tltxcg5.jpeg" />
+      <h1 class="titulo">
+        <strong>Temporary Love</strong>
+      </h1>
+      <h2 class="cantor">The Living Tombstone × CG5</h2>
 
+      <span id="tempoAtual">0:00</span>
+      <input type="range" id="barra" value="0" min="0" max="100" />
+      <span id="tempoTotal">0:00</span>
+
+      <button id="playBtn">▶</button>
+    </div>
 
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>

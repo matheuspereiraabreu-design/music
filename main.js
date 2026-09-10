@@ -1,11 +1,13 @@
-function play() {
-   const audio = document.querySelector("audio");
-     const imagem = document.querySelector(".imagem");
+const audio = document.querySelector("audio");
+const imagem = document.querySelector(".imagem");
+const playBtn = document.getElementById("playBtn");
+const barra = document.getElementById("barra");
+const tempoAtual = document.getElementById("tempoAtual");
+const tempoTotal = document.getElementById("tempoTotal");
 
-  audio.play();
-     imagem.classList.add("girarImagem");
 
-  const lyrics = [[15800, "Time goes by"],
+const lyrics = [
+  [15800, "Time goes by"],
   [16110, "I don't know why I would ever let you hurt me"],
   [18820, "Look me in the eye, tell a little lie"],
   [20840, "Let me know you won't deserve me"],
@@ -53,20 +55,74 @@ function play() {
   [131500, "One last night in the moonlight"],
   [133290, "Wouldn't do another if I could"],
   [135130, "Hold me tight, make it feel right"],
-  [136990, "Leave and never say goodbye"]];
-
+  [136990, "Leave and never say goodbye"],
+];
 
 function showLyric(index) {
   document.querySelector("#antes").innerHTML =
     index > 0 ? lyrics[index - 1][1] : "";
-  document.querySelector("#atual").innerHTML =
-    lyrics[index][1];
+
+  document.querySelector("#atual").innerHTML = lyrics[index][1];
+
   document.querySelector("#prox").innerHTML =
     index < lyrics.length - 1 ? lyrics[index + 1][1] : "";
 }
 
-lyrics.forEach((lyric, index) => {
-   setTimeout(() => { showLyric(index); }, lyric[0]);
-   });
+function play() {
+  audio.play();
 
+  imagem.classList.add("girarImagem");
+
+  playBtn.textContent = "⏸";
+}
+
+function formatarTempo(segundos) {
+  const minutos = Math.floor(segundos / 60);
+  const segundosRestantes = Math.floor(segundos % 60);
+
+  return `${minutos}:${segundosRestantes.toString().padStart(2, "0")}`;
+}
+
+audio.addEventListener("timeupdate", () => {
+  const tempo = audio.currentTime * 1000;
+
+  let index = -1;
+
+  for (let i = 0; i < lyrics.length; i++) {
+    if (tempo >= lyrics[i][0]) {
+      index = i;
+    } else {
+      break;
+    }
   }
+
+  if (index >= 0) {
+    showLyric(index);
+  }
+
+  if (!isNaN(audio.duration)) {
+    barra.value = (audio.currentTime / audio.duration) * 100;
+  }
+
+  tempoAtual.textContent = formatarTempo(audio.currentTime);
+});
+
+audio.addEventListener("loadedmetadata", () => {
+  tempoTotal.textContent = formatarTempo(audio.duration);
+});
+
+barra.addEventListener("input", () => {
+  audio.currentTime = (barra.value / 100) * audio.duration;
+});
+
+playBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    play();
+  } else {
+    audio.pause();
+
+    playBtn.textContent = "▶";
+
+    imagem.classList.remove("girarImagem");
+  }
+});

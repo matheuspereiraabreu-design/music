@@ -1,96 +1,172 @@
 * {
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 body {
-    display: flex;
-    height: 100vh;
-    background: radial-gradient(circle at top, #2a4692, #04093a 80%);
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .musicappear {
-    position: relative;
-    height: 400px;
-    width: 400px;
+  position: relative;
+  height: 400px;
+  width: 400px;
+}
+
+.play {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 80px;
+  width: 100%;
+  border-top: 2px solid #200e0e;
+  background-color: #080101;
+  box-sizing: border-box;
+}
+
+.play img {
+  object-fit: cover;
+  position: absolute;
+  border-radius: 8px;
+  left: 10px;
+  top: 10px;
+  width: 60px;
+  height: 60px;
 }
 
 .titulo {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 300px;
-    border-top: 2px solid #333;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    color: rgb(39, 155, 190);
+  position: absolute;
+  top: 20px;
+  left: 85px;
+  margin: 0;
+  font-size: 15px;
+  color: rgb(39, 155, 190);
+}
+
+.cantor {
+  position: absolute;
+  top: 45px;
+  left: 85px;
+  margin: 0;
+  font-size: 10px;
+  opacity: 0.9;
+  color: rgb(26, 95, 116);
 }
 
 .musicappear img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.5;
-    z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 .letras {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    text-align: center;
-    width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  width: 100%;
+   pointer-events: none;
+}
+
+#playBtn {
+  position: absolute;
+  right: 50%;
+  top: 35%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 1px 0;
+  background-color: rgb(39, 155, 190);
+  color: #080101;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#barra {
+   width: 500px;
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#tempoAtual {
+  position: absolute;
+  left: 30%;
+  bottom: 10px;
+  color: beige;
+}
+
+#tempoTotal {
+  position: absolute;
+  right: 30%;
+  bottom: 10px;
+  color: beige;
 }
 
 #antes {
-    color: beige;
-    font-size: 35px;
-    line-height: 25%;
-    opacity: 0.6;
+  color: beige;
+  font-size: 35px;
+  line-height: 25%;
+  opacity: 0.6;
 }
 
 #atual {
-    color: beige;
-    font-size: 40px;
+  color: beige;
+  font-size: 40px;
 }
 
 #prox {
-    color: beige;
-    font-size: 35px;
-    line-height: 25%;
-    opacity: 0.6;
-}
-
-
-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: rgb(245, 235, 220);
+  color: beige;
+  font-size: 35px;
+  line-height: 25%;
+  opacity: 0.6;
 }
 
 .girarImagem {
-    animation: girar 10s linear infinite;
+  animation: girar 10s linear infinite;
 }
 
 @keyframes girar {
-    from {
-        transform: rotate(0deg)
-    }
+  from {
+    transform: rotate(0deg);
+  }
 
-    to {
-        transform: rotate(360deg)
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
