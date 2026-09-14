@@ -8,7 +8,6 @@
   </head>
 
   <body>
-
     <div class="musicappear">
       <img class="imagem" src="tltxcg5.jpeg" />
     </div>
@@ -19,10 +18,12 @@
         src="The Living Tombstone × CG5 - Temporary Love - The Living Tombstone.mp3"
       ></audio>
 
-      <div class="letras">
-        <p id="antes"></p>
-        <p id="atual">waiting...</p>
-        <p id="prox"></p>
+      <div class="letras-box">
+        <div class="letras">
+          <p id="antes"></p>
+          <p id="atual">waiting...</p>
+          <p id="prox"></p>
+        </div>
       </div>
     </div>
 
@@ -33,16 +34,15 @@
       </h1>
       <h2 class="cantor">The Living Tombstone × CG5</h2>
 
-      <span id="tempoAtual">0:00</span>
-      <input type="range" id="barra" value="0" min="0" max="100" />
-      <span id="tempoTotal">0:00</span>
-
+      <div class="barra-container">
+        <span id="tempoAtual">0:00</span>
+        <input type="range" id="barra" value="0" min="0" max="100" />
+        <span id="tempoTotal">0:00</span>
+      </div>
       <button id="playBtn">▶</button>
     </div>
 
-    <div class="choseMusic">
-     
-    </div>
+    <div class="choseMusic"></div>
 
     <script src="main.js"></script>
   </body>
