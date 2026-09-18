@@ -30,24 +30,26 @@ body {
 }
 
 .play {
-  position: fixed;
+ position: fixed;
   bottom: 0;
   left: 0;
-  height: 85px;
+  height: 90px;
   width: 100%;
-  border-top: 2px solid #200e0e;
-  background-color: #3f0c0c;
+  border-top: 1px solid rgba(39, 155, 190, 0.25);
+  background: rgba(20, 8, 8, 0.92);
   box-sizing: border-box;
+  z-index: 1000;
 }
 
 .play img {
-  object-fit: cover;
+   object-fit: cover;
   position: absolute;
   border-radius: 8px;
   left: 10px;
   top: 10px;
   width: 60px;
   height: 60px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .titulo {
@@ -74,8 +76,6 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  display: flex;
-  flex-direction: column;
   top: 50%;
   left: 80%;
   transform: translate(-110%, -0%);
@@ -85,40 +85,58 @@ body {
 
 .letras-box {
   position: absolute;
-  top: 49%;
+  top: 48%;
   left: 14px;
   transform: translateY(-50%);
   width: min(200vw, 650px);
   min-width: 420px;
   height: 550px;
-  padding: 24px 40px 25px 40px;
-  border-radius: 18px 18px 18px 18px;
+  padding: 24px 40px;
+  border-radius: 18px;
   background: rgb(16, 117, 117);
   border: 1px solid rgba(15, 125, 153, 0.08);
-  border-left: none;
   box-shadow: inset 0 0 0 1px rgba(170, 175, 179, 0.02);
-  display: flex;
-  align-items: center;
-  overflow-wrap: break-word;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.letras-box::-webkit-scrollbar {
+  width: 0px;
 }
 
 .letras {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 15px;
+  justify-content: flex-start;
+  gap: 25px;
   width: 100%;
-  pointer-events: none;
-  align-items: flex-start;
   text-align: left;
+  padding:20px 0 300px 0;
+  box-sizing: border-box;
 }
 
-.letras p {
-    width: 100%;
+.linha-letra {
+  width: 100%;
   margin: 0;
-  white-space: normal;      
+  font-size: 32px;
+  line-height: 130%;
+  color: rgb(8, 56, 56);
+  transition: color 0.3s ease, transform 0.3s ease;
   overflow-wrap: break-word;
-  word-break: break-word;    
+  word-break: break-word;
+  padding: 0 15px;
+  box-sizing: border-box;
+  transform-origin: left center;
+}
+
+.linha-letra.ativa {
+  color: #f5f5dc;
+  font-weight: bold;
+  transform: scale(1.02);
+}
+
+.linha-letra.passada {
+  color: rgba(245, 245, 220, 0.4);
 }
 
 #playBtn {
@@ -155,9 +173,10 @@ body {
 }
 
 #barra {
-  width: 450px;
+   width: 450px;
   max-width: 70%;
   cursor: pointer;
+  accent-color: rgb(39, 155, 190);
 }
 
 #tempoAtual,
@@ -167,28 +186,52 @@ body {
   font-size: 14px;
 }
 
-#antes {
-  color: beige;
-  font-size: 35px;
-  line-height: 120%;
-  opacity: 0.6;
-}
-
-#atual {
-  color: beige;
-  font-size: 40px;
-  line-height: 120%;
-}
-
-#prox {
-  color: beige;
-  font-size: 35px;
-  line-height: 120%;
-  opacity: 0.6;
-}
-
 .choseMusic h1 {
   color: beige;
+}
+
+.letra-completa-container {
+  position: absolute;
+  top: 49%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: min(200vw, 400px);
+  height: 550px;
+  padding: 24px;
+  border-radius: 18px;
+  background: rgba(16, 117, 117, 0.2);
+  border: 1px solid rgba(15, 125, 153, 0.2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.letra-completa-container h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+#letraTotal {
+  white-space: pre-wrap;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #b3b3b3;
+  overflow-y: auto;
+  text-align: left;
+  padding-right: 10px;
+  font-family: sans-serif;
+}
+
+#letraTotal::-webkit-scrollbar {
+  width: 6px;
+}
+#letraTotal::-webkit-scrollbar-thumb {
+  background-color: rgb(39, 155, 190);
+  border-radius: 10px;
 }
 
 .girarImagem {

@@ -5,7 +5,6 @@ const barra = document.getElementById("barra");
 const tempoAtual = document.getElementById("tempoAtual");
 const tempoTotal = document.getElementById("tempoTotal");
 
-
 const lyrics = [
   [15800, "Time goes by"],
   [16110, "I don't know why I would ever let you hurt me"],
@@ -58,34 +57,59 @@ const lyrics = [
   [136990, "Leave and never say goodbye"],
 ];
 
-function showLyric(index) {
-  document.querySelector("#antes").innerHTML =
-    index > 0 ? lyrics[index - 1][1] : "";
+function gerarLetra() {
+  const container = document.getElementById('letraTotal');
+  container.innerHTML = ""; 
 
-  document.querySelector("#atual").innerHTML = lyrics[index][1];
+  lyrics.forEach((linha, i) => {
+    const p = document.createElement('p');
+    p.innerText = linha[1];
+    p.setAttribute('data-index', i); 
+    p.className = 'linha-letra';      
+    container.appendChild(p);
+  });
+}
+gerarLetra(); 
 
-  document.querySelector("#prox").innerHTML =
-    index < lyrics.length - 1 ? lyrics[index + 1][1] : "";
+let ultimoIndex = -1;
+
+function showLyric(indexAtual) {
+  const todasAsLinhas = document.querySelectorAll('.linha-letra');
+  
+  todasAsLinhas.forEach((linha, i) => {
+    linha.classList.remove('ativa', 'passada');
+
+    if (i === indexAtual) {
+      linha.classList.add('ativa'); 
+      
+      if (indexAtual !== ultimoIndex) {
+        linha.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+    } else if (i < indexAtual) {
+      linha.classList.add('passada'); 
+    }
+  });
+
+  ultimoIndex = indexAtual;
 }
 
 function play() {
   audio.play();
-
   imagem.classList.add("girarImagem");
-
   playBtn.textContent = "⏸";
 }
 
 function formatarTempo(segundos) {
   const minutos = Math.floor(segundos / 60);
   const segundosRestantes = Math.floor(segundos % 60);
-
   return `${minutos}:${segundosRestantes.toString().padStart(2, "0")}`;
 }
 
 audio.addEventListener("timeupdate", () => {
   const tempo = audio.currentTime * 1000;
-
   let index = -1;
 
   for (let i = 0; i < lyrics.length; i++) {
@@ -120,9 +144,12 @@ playBtn.addEventListener("click", () => {
     play();
   } else {
     audio.pause();
-
     playBtn.textContent = "▶";
-
     imagem.classList.remove("girarImagem");
   }
+});
+
+audio.addEventListener("ended", () => {
+  playBtn.textContent = "▶";
+  imagem.classList.remove("girarImagem");
 });
