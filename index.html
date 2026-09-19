@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Music Player</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -25,11 +25,11 @@
     </div>
 
     <div class="play">
-      <img src="tltxcg5.jpeg" />
+      <img id="capaPlayer" src="tltxcg5.jpeg" />
       <h1 class="titulo">
-        <strong>Temporary Love</strong>
+        <strong id="tituloMusica">Temporary Love</strong>
       </h1>
-      <h2 class="cantor">The Living Tombstone × CG5</h2>
+      <h2 id="artistaMusica" class="cantor">The Living Tombstone × CG5</h2>
 
       <div class="barra-container">
         <span id="tempoAtual">0:00</span>
@@ -39,7 +39,10 @@
       <button id="playBtn">▶</button>
     </div>
 
-    <div class="choseMusic"></div>
+    <div class="choseMusic" aria-label="Escolher música">
+      <button class="songButton ativa" data-song="temporaryLove">Temporary Love</button>
+      <button class="songButton" data-song="ballad">Ballad of the Walking Machines</button>
+    </div>
 
 
     <script src="main.js"></script>

@@ -4,8 +4,159 @@ const playBtn = document.getElementById("playBtn");
 const barra = document.getElementById("barra");
 const tempoAtual = document.getElementById("tempoAtual");
 const tempoTotal = document.getElementById("tempoTotal");
+const capaPlayer = document.getElementById("capaPlayer");
+const tituloMusica = document.getElementById("tituloMusica");
+const artistaMusica = document.getElementById("artistaMusica");
 
-const lyrics = [
+const balladLyrics = [
+  [9700, "Just around the bend, try to comprehend"],
+  [10500, "These walking machines are not pretend"],
+  [19200, "Far for all repair, can you be prepared?"],
+  [22600, "Don't make it obvious you're scared"],
+  [26700, "Lock up all the doors, hide until the morn"],
+  [30000, "There's no way out, there's no way out"],
+  [33300, "So don't you even try"],
+  [34900, "To run away now"],
+  [38300, "Waiting out the clock, got no time to live"],
+  [41700, "Why'd you pick up a nighttime shift?"],
+  [44700, "Every moment, danger, every moment, fear"],
+  [48000, "They already know that you are here"],
+  [51600, "So lock up all the doors, hide until the morn"],
+  [54900, "There's no way out, there's no way out"],
+  [58000, "So don't you even try"],
+  [59700, "To run away now"],
+  [63300, "So put your sanity in your pocket"],
+  [66400, "Not gonna need it when they come knockin'"],
+  [69500, "Forget about imagination"],
+  [72500, "And pray to God for your salvation"],
+  [75700, "You're alive right now, survive right now"],
+  [78900, "That's all you can do"],
+  [81200, "If you're alive right now, survive right now"],
+  [84600, "That's all you can do"],
+  [88400, "I'm no machine, why would I lie?"],
+  [91200, "Sometimes a dream is a nightmare disguised"],
+  [94200, "No more time to rehearse, so I'll grind through my verse"],
+  [97400, "When I died, system fried, don't know why I still work"],
+  [100400, "And the crime wasn't solved, purple guys, unabsolved"],
+  [103500, "Tryna tie up the theories outlined on your walls"],
+  [106500, "All the sins remain with the pain inside"],
+  [109300, "They reskinned my face, but the paint won't dry"],
+  [112500, "Who said this place was made of magic?"],
+  [115000, "'Cause I call it a casket"],
+  [117100, "And in my case, it's open"],
+  [119100, "But they're hoping they can mask it"],
+  [121500, "An attraction, that's all I am to anyone (oh)"],
+  [124700, "I guess you only learn what you're worth when you're gone (oh)"],
+  [128400, "Nothing left to do, I guess I'll sing the songs that they want"],
+  [132400, "Our collective conscience twisted up as long as I've got"],
+  [135900, "You in my heart, I'll know I'm not alone, baby"],
+  [139200, "It's a comfort knowing we're both going crazy"],
+  [143300, "So put your sanity in your pocket"],
+  [146300, "Not gonna need it when they come knockin'"],
+  [149500, "Forget about imagination"],
+  [152400, "And pray to God for your salvation"],
+  [155600, "You're alive right now, survive right now"],
+  [158700, "That's all you can do"],
+  [161100, "If you're alive right now, survive right now"],
+  [164500, "That's all you can do"],
+  [168600, "I'm crazy, I'm crazy"],
+  [171200, "I'm crazy, I'm going crazy"],
+  [174000, "I'm crazy, I'm crazy"],
+  [176500, "I'm crazy"],
+  [180500, "Just around the bend, try to comprehend"],
+  [183500, "These walking machines are not pretend"],
+  [186400, "Far from all repair, can you be prepared?"],
+  [189500, "Look right over there"],
+  [193700, "So put your sanity in your pocket"],
+  [196700, "Not gonna need it when they come knockin'"],
+  [199900, "Forget about imagination"],
+  [202900, "And pray to God for your salvation"],
+  [206000, "You're alive right now, survive right now"],
+  [209200, "That's all you can do"],
+  [211500, "If you're alive right now, survive right now"],
+  [214900, "That's all you can do"],
+  [218300, "I'm crazy, I'm crazy (woah)"],
+  [220100, "I'm crazy, I'm going crazy (oh-oh)"],
+  [221900, "I'm crazy, I'm crazy"],
+  [223000, "I'm crazy"],
+];
+
+const syncedBalladLyrics = [
+  [420, "Haha"],
+  [1440, "Just around the bend, try to comprehend"],
+  [3860, "These walking machines are not pretend"],
+  [6770, "Far from all repair, can you be prepared?"],
+  [9690, "Don't make it obvious, you're scared"],
+  [12580, "Lock up all the doors, hide until the morn'"],
+  [15220, "There's no way out, there's no way out"],
+  [18020, "So don't you even try to run away now"],
+  [24280, "Waiting out the clock, got no time to live"],
+  [26680, "Why'd you pick up a nighttime shift?"],
+  [29300, "Every moment, danger, every moment, fear"],
+  [32300, "They already know that you are here"],
+  [34760, "So lock up all the doors, hide until the morn'"],
+  [38030, "There's no way out, there's no way out"],
+  [40260, "So don't you even try to run away now"],
+  [46420, "So put your sanity in your pocket"],
+  [49250, "Not gonna need it when they come knockin'"],
+  [51950, "Forget about your imagination"],
+  [54780, "And pray to God for your salvation"],
+  [58370, "You're alive right now, survive right now"],
+  [61560, "That's all you can do"],
+  [64170, "If you're alive right now, survive right now"],
+  [67160, "That's all you can do"],
+  [69620, "I'm no machine, why would I lie?"],
+  [72510, "Sometimes a dream is a nightmare disguised"],
+  [75050, "No more time to rehearse"],
+  [76240, "So I'll grind through my verse"],
+  [77880, "When I died, system fried"],
+  [78850, "Don't know why I still work"],
+  [80400, "And the crime wasn't solved"],
+  [81820, "Purple guys, unabsolved"],
+  [83180, "Tryna tie up the theories"],
+  [84630, "Outlined on your walls"],
+  [86180, "All the sins remain with the pain inside"],
+  [88850, "They reskinned my face, but the paint won't dry"],
+  [91630, "Who said this place was made of magic? 'Cause I call it a casket"],
+  [94870, "And in my case it's open, but they're hoping they can mask it"],
+  [97870, "An attraction, that's all I am to anyone"],
+  [100650, "Guess you only learn what you're worth when you're gone"],
+  [103160, "Nothing left to do, I guess I'll sing the songs that they want"],
+  [106160, "Our collective conscience twisted up"],
+  [107850, "As long as I've got you in my heart"],
+  [109860, "I'll know I'm not alone, baby"],
+  [111920, "It's a comfort knowing we're both going crazy"],
+  [114290, "So put your sanity in your pocket"],
+  [116830, "Not gonna need it when they come knockin'"],
+  [119850, "Forget about your imagination"],
+  [122340, "And pray to God for your salvation"],
+  [126480, "You're alive right now, survive right now"],
+  [129230, "That's all you can do"],
+  [131630, "If you're alive right now, survive right now"],
+  [134950, "That's all you can do"],
+  [137910, "I'm crazy, I'm crazy"],
+  [140780, "I'm crazy, I'm going crazy"],
+  [143470, "I'm crazy, I'm crazy"],
+  [146420, "I'm crazy"],
+  [148430, "Just around the bend, try to comprehend"],
+  [150920, "These walking machines are not pretend"],
+  [153710, "Far from all repair, can you be prepared?"],
+  [156590, "Look right over there"],
+  [158810, "So put your sanity in your pocket"],
+  [161430, "Not gonna need it when they come knockin'"],
+  [164470, "Forget about your imagination"],
+  [166750, "And pray to God for your salvation"],
+  [170520, "If you're alive right now, survive right now"],
+  [173520, "That's all you can do"],
+  [176380, "If you're alive right now, survive right now"],
+  [179390, "That's all you can do"],
+  [182500, "I'm crazy, I'm crazy"],
+  [185130, "I'm crazy, I'm going crazy"],
+  [188060, "I'm crazy, I'm crazy"],
+  [190860, "I'm crazy"],
+];
+
+const temporaryLoveLyrics = [
   [15800, "Time goes by"],
   [16110, "I don't know why I would ever let you hurt me"],
   [18820, "Look me in the eye, tell a little lie"],
@@ -57,6 +208,25 @@ const lyrics = [
   [136990, "Leave and never say goodbye"],
 ];
 
+const songs = {
+  temporaryLove: {
+    title: "Temporary Love",
+    artist: "The Living Tombstone × CG5",
+    cover: "tltxcg5.jpeg",
+    source: "The Living Tombstone × CG5 - Temporary Love - The Living Tombstone.mp3",
+    lyrics: temporaryLoveLyrics,
+  },
+  ballad: {
+    title: "Ballad of the Walking Machines",
+    artist: "CG5 × JT Music",
+    cover: "ballad.png",
+    source: "Ballad of the Walking Machines.mp3",
+    lyrics: syncedBalladLyrics,
+  },
+};
+
+let lyrics = songs.temporaryLove.lyrics;
+
 function gerarLetra() {
   const container = document.getElementById('letraTotal');
   container.innerHTML = ""; 
@@ -72,6 +242,35 @@ function gerarLetra() {
 gerarLetra(); 
 
 let ultimoIndex = -1;
+
+function selecionarMusica(songId) {
+  const song = songs[songId];
+  if (!song) return;
+
+  audio.pause();
+  audio.src = song.source;
+  audio.load();
+  imagem.src = song.cover;
+  capaPlayer.src = song.cover;
+  tituloMusica.textContent = song.title;
+  artistaMusica.textContent = song.artist;
+  lyrics = song.lyrics;
+  ultimoIndex = -1;
+  barra.value = 0;
+  tempoAtual.textContent = "0:00";
+  tempoTotal.textContent = "0:00";
+  playBtn.textContent = "▶";
+  imagem.classList.remove("girarImagem");
+  gerarLetra();
+
+  document.querySelectorAll(".songButton").forEach((button) => {
+    button.classList.toggle("ativa", button.dataset.song === songId);
+  });
+}
+
+document.querySelectorAll(".songButton").forEach((button) => {
+  button.addEventListener("click", () => selecionarMusica(button.dataset.song));
+});
 
 function showLyric(indexAtual) {
   const todasAsLinhas = document.querySelectorAll('.linha-letra');
